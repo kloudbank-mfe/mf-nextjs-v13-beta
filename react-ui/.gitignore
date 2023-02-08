@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# react
+/dist
+
 # production
 /build
 
