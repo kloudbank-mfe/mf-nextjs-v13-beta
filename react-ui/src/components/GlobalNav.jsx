@@ -6,7 +6,10 @@ import NextLogo from './NextLogo';
 // import { useSelectedLayoutSegment } from 'next/navigation';
 import { MenuAlt2Icon, XIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
-// import { useState } from 'react';
+import { useState } from 'react';
+
+// const [isOpen, setIsOpen] = useState(false);
+// const close = () => setIsOpen(false);
 
 export default function GlobalNav() {
   // cannot useState

@@ -12,13 +12,13 @@ const federationConfig = {
   shared: {
     // react: { singleton: true, eager: true, requiredVersion: false },
     // "react-dom": { singleton: true, eager: true, requiredVersion: false },
-    // react: { eager: true },
-    // "react-dom": { eager: true },
+    // react: { singleton: true },
+    // "react-dom": { singleton: true },
   },
 };
 
 const nextConfig = {
-  swcMinify: true,
+  reactStrictMode: true,
   webpack: (config, options) => {
     Object.assign(config.experiments, { topLevelAwait: true });
 

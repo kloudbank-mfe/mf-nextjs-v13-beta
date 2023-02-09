@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const NextFederationPlugin = require('@module-federation/nextjs-mf');
+const deps = require('./package.json').dependencies;
 
 const remotes = (isServer) => {
   const location = isServer ? "ssr" : "chunks";
@@ -13,14 +14,30 @@ const remotes = (isServer) => {
 const federationConfig = {
   name: 'app',
   filename: 'static/chunks/remoteEntry.js',
-  exposes: {},
-  remotes: {},
-  shared: {
-    // react: { singleton: true, requiredVersion: false },
-    // "react-dom": { singleton: true, requiredVersion: false },
-    // react: { eager: true },
-    // "react-dom": { eager: true },
-  },
+  // exposes: {},
+  // shared: ['react', 'react-dom'],
+  // shared: {
+  //   'react-dom': {
+  //     requiredVersion: deps['react-dom'],
+  //     singleton: true,
+  //   },
+  //   react: {
+  //     requiredVersion: deps['react'],
+  //     singleton: true,
+  //   },
+  // },
+  // shared: {
+  //   ...deps,
+  //   'react-router-dom': {
+  //     singleton: true,
+  //   },
+  //   'react-dom': {
+  //     singleton: true,
+  //   },
+  //   react: {
+  //     singleton: true,
+  //   },
+  // },
 };
 
 const nextConfig = {
@@ -30,14 +47,20 @@ const nextConfig = {
     appDir: true,
   },
   webpack: (config, options) => {
-    config.resolve.fallback = {
-      ui: false,
-    }; 
+    // config.resolve.fallback = {
+    //   ui: false,
+    // };
     if (!options.isServer) {
       config.plugins.push(
         new NextFederationPlugin({
           ...federationConfig,
           remotes: remotes(options.isServer),
+          // extraOptions:{
+          //   automaticAsyncBoundary: true,
+          // },
+          // extraOptions: {
+          //   skipSharingNextInternals: true,
+          // },
         }),
       );
       // config.plugins.push(
