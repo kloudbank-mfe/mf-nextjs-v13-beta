@@ -1,8 +1,9 @@
-const NextFederationPlugin = require('@module-federation/nextjs-mf');
+const NextFederationPlugin = require("@module-federation/nextjs-mf");
+const deps = require("./package.json").dependencies;
 
 const federationConfig = {
-  name: 'ui',
-  filename: 'static/chunks/remoteEntry.js',
+  name: "micro_ui",
+  filename: "static/chunks/remoteEntry.js",
   exposes: {
     "./AddressBar": "./ui/AddressBar",
     "./GlobalNav": "./ui/GlobalNav",
@@ -10,6 +11,21 @@ const federationConfig = {
   },
   remotes: {},
   shared: {
+    ...deps,
+    "next/link": {
+      singleton: true,
+      eager: true,
+    },
+    "react-dom": {
+      requiredVersion: deps["react-dom"],
+      singleton: true,
+      eager: true,
+    },
+    react: {
+      requiredVersion: deps["react"],
+      singleton: true,
+      eager: true,
+    },
     // react: { singleton: true, eager: true, requiredVersion: false },
     // "react-dom": { singleton: true, eager: true, requiredVersion: false },
     // react: { singleton: true },
@@ -23,9 +39,7 @@ const nextConfig = {
     Object.assign(config.experiments, { topLevelAwait: true });
 
     if (!options.isServer) {
-      config.plugins.push(
-        new NextFederationPlugin(federationConfig),
-      );
+      config.plugins.push(new NextFederationPlugin(federationConfig));
       // config.plugins.push(
       //   new FederatedTypesPlugin({
       //     federationConfig: {

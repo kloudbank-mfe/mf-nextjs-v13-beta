@@ -4,9 +4,9 @@ const NextFederationPlugin = require('@module-federation/nextjs-mf');
 const deps = require('./package.json').dependencies;
 
 const remotes = (isServer) => {
-  const location = isServer ? "ssr" : "chunks";
+  const location = isServer ? 'ssr' : 'chunks';
   return {
-    ui: `ui@http://localhost:3030/_next/static/${location}/remoteEntry.js`,
+    ui: `micro_ui@http://localhost:3030/_next/static/${location}/remoteEntry.js`,
     // ui: `remote@http://localhost:3031/remoteEntry.js`,
   };
 };

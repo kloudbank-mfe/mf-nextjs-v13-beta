@@ -4,29 +4,44 @@ const NextFederationPlugin = require('@module-federation/nextjs-mf');
 const deps = require('./package.json').dependencies;
 
 const remotes = (isServer) => {
-  const location = isServer ? "ssr" : "chunks";
+  const location = isServer ? 'ssr' : 'chunks';
   return {
     // ui: `ui@http://localhost:3030/_next/static/${location}/remoteEntry.js`,
-    ui: `remote@http://localhost:3031/remoteEntry.js`,
+    ui: `micro_ui@http://localhost:3030/_next/static/chunks/remoteEntry.js`,
   };
 };
 
 const federationConfig = {
   name: 'app',
   filename: 'static/chunks/remoteEntry.js',
-  // exposes: {},
+  exposes: {},
   // shared: ['react', 'react-dom'],
   // shared: {
-  //   'react-dom': {
-  //     requiredVersion: deps['react-dom'],
-  //     singleton: true,
-  //   },
-  //   react: {
-  //     requiredVersion: deps['react'],
-  //     singleton: true,
-  //   },
+  // ...deps,
+  // 'next/link': {
+  //   singleton: true,
+  //   eager: true,
   // },
-  // shared: {
+  // 'react-dom': {
+  //   shareKey: 'react-dom',
+  //   import: 'react-dom',
+  //   requiredVersion: deps['react-dom'],
+  //   version: deps['react-dom'],
+  //   strictVersion: true,
+  //   singleton: true,
+  //   eager: true,
+  // },
+  // react: {
+  //   shareKey: 'react',
+  //   import: 'react',
+  //   requiredVersion: deps['react'],
+  //   version: deps['react'],
+  //   strictVersion: true,
+  //   singleton: true,
+  //   eager: true,
+  // },
+  // react: { singleton: false, requiredVersion: false, eager: false },
+  // 'react-dom': { singleton: false, requiredVersion: false, eager: false },
   //   ...deps,
   //   'react-router-dom': {
   //     singleton: true,
@@ -37,6 +52,24 @@ const federationConfig = {
   //   react: {
   //     singleton: true,
   //   },
+  // },
+  // shared: {
+  // fakeReact: {
+  //   import: 'react',
+  //   shareKey: 'react',
+  // },
+  // fakeReactDom: {
+  //   import: 'react-dom',
+  //   shareKey: 'react-dom',
+  // },
+  // react: { singleton: true, requiredVersion: '18.2.0', eager: true },
+  // 'react-dom': { singleton: true, requiredVersion: '18.2.0', eager: true },
+  // react: { requiredVersion: false, eager: true },
+  // 'react-dom': { requiredVersion: false, eager: true },
+  // react: { singleton: true, requiredVersion: false },
+  // 'react-dom': { singleton: true, requiredVersion: false },
+  // react: { eager: false },
+  // 'react-dom': { eager: false },
   // },
 };
 
