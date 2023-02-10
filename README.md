@@ -23,14 +23,18 @@ nextjs v13, 기존 pages 사용 기반 remote app
 
 react 기반 remote app
 
+---
+
 # micro-ui + micro-app 실행 방법
 
 1. cd micro-ui
 2. yarn
 3. cd ../micro-app
 4. yarn
-5. npm run build
-6. npm run serve
+5. cd ..
+6. npm i
+7. npm run build
+8. npm run serve
 
 # micro-ui + micro 실행 방법
 
@@ -38,4 +42,6 @@ react 기반 remote app
 2. yarn
 3. cd ../micro
 4. yarn
-5. npm start-nextjs-pages-dir
+5. cd ..
+6. npm i
+7. npm start-nextjs-pages-dir
