@@ -8,10 +8,11 @@
   "version": "0.0.0",
   "scripts": {
     "start": "concurrently \"cd micro-app; npm run dev\" \"cd micro-ui; npm run dev\"",
+    "start-nextjs-pages-dir": "concurrently \"cd micro; npm run dev\" \"cd micro-ui; npm run dev\"",
     "build": "concurrently \"cd micro-app; npm run build\" \"cd micro-ui; npm run build\"",
     "serve": "concurrently \"cd micro-app; npm run start\" \"cd micro-ui; npm run start\""
   },
   "dependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.6.0"
   }
 }

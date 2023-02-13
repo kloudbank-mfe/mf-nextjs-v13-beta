@@ -1,6 +1,7 @@
 // @ts-nocheck
-'use client'
-import '@module-federation/nextjs-mf/src/include-defaults';
+'use client';
+// import '@module-federation/nextjs-mf/src/include-defaults';  // 현시점엔 의미 없음
+import { usePathname } from 'next/navigation';
 
 import '#/styles/globals.css';
 // import { AddressBar } from '#/ui/AddressBar';
@@ -8,17 +9,17 @@ import '#/styles/globals.css';
 // import { VercelLogo } from '#/ui/VercelLogo';
 
 import dynamic from 'next/dynamic';
-// import { useState } from 'react';
-import React from 'react';
 
 const AddressBar = dynamic(() => import('ui/AddressBar'), {
+  loading: () => <div>AddressBar dynamic loading...</div>,
   ssr: false,
 });
 const GlobalNav = dynamic(() => import('ui/GlobalNav'), {
+  loading: () => <div>GlobalNav dynamic loading...</div>,
   ssr: false,
 });
-
 const VercelLogo = dynamic(() => import('ui/VercelLogo'), {
+  loading: () => <div>VercelLogo dynamic loading...</div>,
   ssr: false,
 });
 
@@ -27,22 +28,26 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
+  const pathname = usePathname();
   return (
     <html lang="en" className="[color-scheme:dark]">
-      <head />
+      <head>
+        {/** 현시점엔 의미 없음, CRA 같은 프레임워크에서 import('bootstrap') 사용시
+         * 메인 번들보다 먼저 임포트하게 하여 웹팩 모듈 로드 순서 변경하는 코드
+         * */}
+        {/* <script src="http://localhost:3030/_next/static/chunks/remoteEntry.js"></script> */}
+      </head>
       <body className="overflow-y-scroll bg-gray-1100 bg-[url('/grid.svg')]">
-        <GlobalNav 
-          sharedReact={React}
-          sharedWindow={() => {return window.root = React}}
-        >
-        </GlobalNav>
+        {/* {next/dynamic import가 Suspense를 포함} */}
+        {/* <Suspense fallback={<div>loading...</div>}> */}
+        <GlobalNav />
+        {/* </Suspense> */}
 
         <div className="lg:pl-72">
           <div className="mx-auto max-w-4xl space-y-8 px-2 pt-20 lg:py-8 lg:px-8">
             <div className="rounded-lg bg-vc-border-gradient p-px shadow-lg shadow-black/20">
               <div className="rounded-lg bg-black">
-                <AddressBar />
+                <AddressBar pathname={pathname} />
               </div>
             </div>
             <div className="rounded-lg bg-vc-border-gradient p-px shadow-lg shadow-black/20">
@@ -77,7 +82,8 @@ function Byline() {
         <a
           className="underline decoration-dotted underline-offset-4 hover:text-gray-400"
           href="https://github.com/vercel/app-playground"
-          target="_blank" rel="noreferrer"
+          target="_blank"
+          rel="noreferrer"
         >
           View code
         </a>
@@ -85,7 +91,8 @@ function Byline() {
         <a
           className="underline decoration-dotted underline-offset-4 hover:text-gray-400"
           href="https://vercel.com/templates/next.js/app-directory"
-          target="_blank" rel="noreferrer"
+          target="_blank"
+          rel="noreferrer"
         >
           deploy your own
         </a>
