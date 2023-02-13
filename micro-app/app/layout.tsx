@@ -9,7 +9,7 @@ import '#/styles/globals.css';
 
 import dynamic from 'next/dynamic';
 // import { useState } from 'react';
-import { lazy } from 'react';
+import React from 'react';
 
 const AddressBar = dynamic(() => import('ui/AddressBar'), {
   ssr: false,
@@ -17,7 +17,6 @@ const AddressBar = dynamic(() => import('ui/AddressBar'), {
 const GlobalNav = dynamic(() => import('ui/GlobalNav'), {
   ssr: false,
 });
-// const GlobalNav = lazy(() => import("ui/GlobalNav"));
 
 const VercelLogo = dynamic(() => import('ui/VercelLogo'), {
   ssr: false,
@@ -33,7 +32,11 @@ export default function RootLayout({
     <html lang="en" className="[color-scheme:dark]">
       <head />
       <body className="overflow-y-scroll bg-gray-1100 bg-[url('/grid.svg')]">
-        <GlobalNav />
+        <GlobalNav 
+          sharedReact={React}
+          sharedWindow={() => {return window.root = React}}
+        >
+        </GlobalNav>
 
         <div className="lg:pl-72">
           <div className="mx-auto max-w-4xl space-y-8 px-2 pt-20 lg:py-8 lg:px-8">
