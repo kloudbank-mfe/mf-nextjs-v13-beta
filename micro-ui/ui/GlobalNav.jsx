@@ -9,9 +9,14 @@ import { MenuAlt2Icon, XIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
 import { useState } from 'react';
 
-export default function GlobalNav() {
+export default function GlobalNav({
+  sharedReact,
+  sharedWindow,
+}) {
   // cannot useState
   const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = sharedReact? sharedReact.useState(false): useState(false);
+  // const [isOpen, setIsOpen] = !!sharedWindow ? sharedWindow.root.useState(false): useState(false);
   const close = () => setIsOpen(false);
   // var isOpen = true;
   // var setIsOpen = (obj) => {isOpen = obj;};
