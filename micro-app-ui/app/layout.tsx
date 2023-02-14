@@ -1,6 +1,6 @@
 // @ts-nocheck
 'use client'
-import '@module-federation/nextjs-mf/src/include-defaults';
+// import '@module-federation/nextjs-mf/src/include-defaults';
 
 import '#/styles/globals.css';
 // import { AddressBar } from '#/ui/AddressBar';
@@ -9,7 +9,6 @@ import '#/styles/globals.css';
 
 import dynamic from 'next/dynamic';
 // import { useState } from 'react';
-import { lazy } from 'react';
 
 const AddressBar = dynamic(() => import('ui/AddressBar'), {
   ssr: false,
@@ -17,8 +16,6 @@ const AddressBar = dynamic(() => import('ui/AddressBar'), {
 const GlobalNav = dynamic(() => import('ui/GlobalNav'), {
   ssr: false,
 });
-// const GlobalNav = lazy(() => import("ui/GlobalNav"));
-
 const VercelLogo = dynamic(() => import('ui/VercelLogo'), {
   ssr: false,
 });

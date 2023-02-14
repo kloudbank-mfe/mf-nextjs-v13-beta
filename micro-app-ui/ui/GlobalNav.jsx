@@ -1,5 +1,5 @@
 'use client'
-import '@module-federation/nextjs-mf/src/include-defaults';
+// import '@module-federation/nextjs-mf/src/include-defaults';
 
 import demos from '#/lib/demos';
 import NextLogo from '#/ui/NextLogo';
@@ -20,7 +20,7 @@ export default function GlobalNav() {
   return (
     <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-72 lg:border-r lg:border-gray-800">
       <div className="flex h-14 items-center py-4 px-4 lg:h-auto">
-        <Link
+        <a
           href="/"
           className="group flex w-full items-center gap-x-2.5"
           onClick={close}
@@ -32,7 +32,7 @@ export default function GlobalNav() {
           <h3 className="font-semibold tracking-wide text-gray-400 group-hover:text-gray-50">
             App Directory <span className="Work in progress">(WIP)</span>
           </h3>
-        </Link>
+        </a>
       </div>
       <button
         type="button"

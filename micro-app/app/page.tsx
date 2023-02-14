@@ -4,7 +4,7 @@
 
 import { demos } from '#/lib/demos';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 
 // const demos = dynamic(() => import('remote/demos'), {
 //   ssr: false,

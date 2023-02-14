@@ -1,5 +1,5 @@
 {
-  "name": "micro-app",
+  "name": "micro",
   "private": true,
   "scripts": {
     "build": "next build",

@@ -1,5 +1,5 @@
 'use client'
-import '@module-federation/nextjs-mf/src/include-defaults';;
+// import '@module-federation/nextjs-mf/src/include-defaults';;
 
 import { demos, type Item } from '#/lib/demos';
 import { NextLogo } from '#/ui/NextLogo';

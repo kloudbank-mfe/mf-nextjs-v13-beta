@@ -1,5 +1,5 @@
 'use client'
-import '@module-federation/nextjs-mf/src/include-defaults';;
+// import '@module-federation/nextjs-mf/src/include-defaults';;
 
 import { MenuAlt2Icon, XIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';

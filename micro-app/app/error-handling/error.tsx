@@ -1,5 +1,5 @@
 'use client'
-import '@module-federation/nextjs-mf/src/include-defaults';;
+// import '@module-federation/nextjs-mf/src/include-defaults';;
 
 import { Boundary } from '#/ui/Boundary';
 import Button from '#/ui/Button';

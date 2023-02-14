@@ -1,11 +1,63 @@
 /** @type {import('next').NextConfig} */
 
-// const NextFederationPlugin = require('@module-federation/nextjs-mf');
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const deps = require('./package.json').dependencies;
 
+const DEFAULT_SHARE_SCOPE = {
+  'react': {
+    singleton: true,
+    requiredVersion: false,
+    eager: true,
+  },
+  'react/': {
+    singleton: true,
+    requiredVersion: false,
+    eager: true,
+  },
+  'react-dom': {
+    singleton: true,
+    requiredVersion: false,
+    eager: true,
+  },
+  'next/dynamic': {
+    requiredVersion: false,
+    singleton: true,
+    eager: true,
+  },
+  'styled-jsx': {
+    requiredVersion: false,
+    singleton: true,
+    eager: true,
+  },
+  'styled-jsx/style': {
+    requiredVersion: false,
+    singleton: true,
+    eager: true,
+  },
+  'next/link': {
+    requiredVersion: false,
+    singleton: true,
+    eager: true,
+  },
+  'next/router': {
+    requiredVersion: false,
+    singleton: true,
+    eager: true,
+  },
+  'next/script': {
+    requiredVersion: false,
+    singleton: true,
+    eager: true,
+  },
+  'next/head': {
+    requiredVersion: false,
+    singleton: true,
+    eager: true,
+  },
+};
+
 const federationConfig = {
-  name: 'ui',
+  name: 'micro_ui',
   filename: 'static/chunks/remoteEntry.js',
   exposes: {
     "./AddressBar": "./ui/AddressBar",
@@ -13,16 +65,17 @@ const federationConfig = {
     "./VercelLogo": "./ui/VercelLogo",
   },
   shared: {
-    'react-dom': {
-      singleton: true,
-      requiredVersion: deps['react-dom'],
-      eager: true,
-    },
-    react: {
-      singleton: true,
-      requiredVersion: deps['react'],
-      eager: true,
-    },
+    ...DEFAULT_SHARE_SCOPE,
+    // 'react-dom': {
+    //   singleton: true,
+    //   requiredVersion: deps['react-dom'],
+    //   eager: true,
+    // },
+    // react: {
+    //   singleton: true,
+    //   requiredVersion: deps['react'],
+    //   eager: true,
+    // },
   },
 };
 
@@ -32,9 +85,9 @@ const nextConfig = {
     appDir: true,
   },
   webpack: (config, options) => {
-    // config.resolve.fallback = {
-    //   ui: false,
-    // };
+    
+    Object.assign(config.experiments, { topLevelAwait: true });
+
     if (!options.isServer) {
       config.plugins.push(
         new ModuleFederationPlugin({
@@ -43,9 +96,6 @@ const nextConfig = {
       );
     }
 
-    // config.infrastructureLogging = {
-    //   level: 'log'
-    // };
     return config;
   },
 };

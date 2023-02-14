@@ -1,6 +1,6 @@
 // @ts-nocheck
 'use client';
-// import '@module-federation/nextjs-mf/src/include-defaults';  // 현시점엔 의미 없음
+import '@module-federation/nextjs-mf/src/include-defaults';  // 현시점엔 의미 없음
 import { usePathname } from 'next/navigation';
 
 import '#/styles/globals.css';
@@ -23,6 +23,7 @@ const VercelLogo = dynamic(() => import('ui/VercelLogo'), {
   ssr: false,
 });
 
+
 export default function RootLayout({
   children,
 }: {
@@ -36,6 +37,17 @@ export default function RootLayout({
          * 메인 번들보다 먼저 임포트하게 하여 웹팩 모듈 로드 순서 변경하는 코드
          * */}
         {/* <script src="http://localhost:3030/_next/static/chunks/remoteEntry.js"></script> */}
+        {/* <script src="http://localhost:3030/_next/static/chunks/node_modules_next_link_js.js"></script>
+        <script src="http://localhost:3030/_next/static/chunks/node_modules_next_dist_client_components_noop-head_js.js"></script>
+        <script src="http://localhost:3030/_next/static/chunks/node_modules_next_dist_compiled_react-dom_index_js.js"></script>
+        <script src="http://localhost:3030/_next/static/chunks/node_modules_next_dist_compiled_react_index_js.js"></script> */}
+        {/* <script src="http://localhost:3030/_next/static/chunks/app-client-internals.js"></script> */}
+        {/* <script src="http://localhost:3030/_next/static/chunks/ui_AddressBar_jsx.js"></script>
+        <script src="http://localhost:3030/_next/static/chunks/ui_GlobalNav_jsx.js"></script>
+        <script src="http://localhost:3030/_next/static/chunks/ui_VercelLogo_jsx.js"></script> */}
+        {/* <script src="http://localhost:3030/_next/static/chunks/_app-client_ui_AddressBar_jsx.js"></script>
+        <script src="http://localhost:3030/_next/static/chunks/_app-client_ui_GlobalNav_jsx.js"></script>
+        <script src="http://localhost:3030/_next/static/chunks/_app-client_ui_VercelLogo_jsx.js"></script> */}
       </head>
       <body className="overflow-y-scroll bg-gray-1100 bg-[url('/grid.svg')]">
         {/* {next/dynamic import가 Suspense를 포함} */}

@@ -1,5 +1,5 @@
 'use client'
-import '@module-federation/nextjs-mf/src/include-defaults';;
+// import '@module-federation/nextjs-mf/src/include-defaults';;
 
 import React from 'react';
 import { usePathname } from 'next/navigation';

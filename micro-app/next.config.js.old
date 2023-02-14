@@ -1,14 +1,60 @@
 /** @type {import('next').NextConfig} */
 
-// const NextFederationPlugin = require('@module-federation/nextjs-mf');
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const deps = require('./package.json').dependencies;
 
+const DEFAULT_SHARE_SCOPE = {
+  'react': {
+    singleton: true,
+    requiredVersion: false,
+  },
+  'react/': {
+    singleton: true,
+    requiredVersion: false,
+  },
+  'react-dom': {
+    singleton: true,
+    requiredVersion: false,
+  },
+  'next/dynamic': {
+    requiredVersion: false,
+    singleton: true,
+  },
+  'styled-jsx': {
+    requiredVersion: false,
+    singleton: true,
+  },
+  'styled-jsx/style': {
+    requiredVersion: false,
+    singleton: true,
+  },
+  'next/link': {
+    requiredVersion: false,
+    singleton: true,
+  },
+  'next/router': {
+    requiredVersion: false,
+    singleton: true,
+  },
+  'next/script': {
+    requiredVersion: false,
+    singleton: true,
+  },
+  'next/head': {
+    requiredVersion: false,
+    singleton: true,
+  },
+};
+
+
+// const { createDelegatedModule } = require('@module-federation/utilities');
 const remotes = (isServer) => {
   const location = isServer ? "ssr" : "chunks";
   return {
-    ui: `ui@http://localhost:3030/_next/static/${location}/remoteEntry.js`,
-    // ui: `remote@http://localhost:3031/remoteEntry.js`,
+    ui: `micro_ui@http://localhost:3030/_next/static/${location}/remoteEntry.js`,
+    // ui: createDelegatedModule(require.resolve('./remote-delegate.js'), {
+    //   remote: `micro_ui@http://localhost:3030/_next/static/${location}/remoteEntry.js`,
+    // }),
   };
 };
 
@@ -17,6 +63,7 @@ const federationConfig = {
   filename: 'static/chunks/remoteEntry.js',
   exposes: {},
   shared: {
+    // ...DEFAULT_SHARE_SCOPE,
     'react-dom': {
       singleton: true,
       requiredVersion: deps['react-dom'],
@@ -37,9 +84,6 @@ const nextConfig = {
     appDir: true,
   },
   webpack: (config, options) => {
-    // config.resolve.fallback = {
-    //   ui: false,
-    // };
     if (!options.isServer) {
       config.plugins.push(
         new ModuleFederationPlugin({
@@ -49,9 +93,6 @@ const nextConfig = {
       );
     }
 
-    // config.infrastructureLogging = {
-    //   level: 'log'
-    // };
     return config;
   },
 };

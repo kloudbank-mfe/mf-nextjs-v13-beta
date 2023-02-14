@@ -1,16 +1,9 @@
-// 'use client'
+'use client'
+import '@module-federation/nextjs-mf/src/include-defaults';
 
 import * as React from 'react';
-import { usePathname } from 'next/navigation'; // cannot useContext
-import { useRouter } from 'next/router' // cannot useContext
 
-
-export default function AddressBar() {
-  // const pathname = usePathname();
-  // const router = useRouter()
-  // const pathname = router.pathname;
-  // console.log(router.pathname);
-  const pathname = 'cannot use';
+export default function AddressBar({pathname} = props) {
 
   return (
     <div className="flex items-center gap-x-2 p-3.5 lg:px-5 lg:py-3">
